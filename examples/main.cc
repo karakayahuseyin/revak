@@ -3,11 +3,11 @@
  * @brief Simple multithreaded HTTP server example
  * 
  * Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
- * Licensed under the MIT License. Part of the Grid project.
+ * Licensed under the MIT License. Part of the Revak project.
  */
 
-#include "grid/Socket.h"
-#include "grid/ThreadPool.h"
+#include "revak/Socket.h"
+#include "revak/ThreadPool.h"
 
 #include <iostream>
 #include <string>
@@ -16,7 +16,7 @@
 
 #define NUMS_THREAD 4
 
-void HandleClient(std::shared_ptr<grid::Socket> client) {
+void HandleClient(std::shared_ptr<revak::Socket> client) {
   std::string body = "Hello from Thread "
     + std::to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
 
@@ -34,19 +34,19 @@ void HandleClient(std::shared_ptr<grid::Socket> client) {
 int main() {
   try {
 		std::cout << "[Main] Starting Server with " << NUMS_THREAD << " threads." << std::endl;
-		grid::ThreadPool pool(NUMS_THREAD);
+		revak::ThreadPool pool(NUMS_THREAD);
 
-		grid::Socket server;
+		revak::Socket server;
 		server.Bind(8080);
 		server.Listen();
 
 		std::cout << "[Main] Server is listening on port 8080" << std::endl;
 
 		while (true) {
-			grid::Socket client = server.Accept();
+			revak::Socket client = server.Accept();
 			
 			// Use shared_ptr to manage client socket lifetime in threads
-			auto shared_client = std::make_shared<grid::Socket>(std::move(client));
+			auto shared_client = std::make_shared<revak::Socket>(std::move(client));
 
 			// Enqueue client handling task to the thread pool
 			pool.Enqueue([shared_client] {

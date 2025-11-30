@@ -3,7 +3,7 @@
  * @brief Server's thread pool for handling concurrent tasks.
  * 
  * Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
- * Licensed under the MIT License. Part of the Grid project.
+ * Licensed under the MIT License. Part of the Revak project.
  */
 
 #include <vector>
@@ -15,7 +15,7 @@
 #include <future>
 #include <stdexcept>
 
-namespace grid {
+namespace revak {
 
 class ThreadPool {
 public:
@@ -48,4 +48,4 @@ private:
   std::condition_variable condition_;
 };
 
-} // namespace grid
+} // namespace revak

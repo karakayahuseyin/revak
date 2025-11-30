@@ -1,10 +1,10 @@
 # Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
-# Licensed under the MIT License. Part of the Grid project.
+# Licensed under the MIT License. Part of the Revak project.
 
 cmake_minimum_required(VERSION 3.10)
 
 project(
-  grid-web-server
+  revak-web-server
   VERSION 0.1.0
   LANGUAGES CXX
 )
@@ -34,18 +34,18 @@ endif()
 
 find_package(Threads REQUIRED)
 
-add_library(libgrid
+add_library(librevak
   src/Socket.cc
   src/ThreadPool.cc
 )
 
-target_include_directories(libgrid PUBLIC 
+target_include_directories(librevak PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(libgrid PUBLIC Threads::Threads)
+target_link_libraries(librevak PUBLIC Threads::Threads)
 
 # Example executable
-add_executable(grid examples/main.cc)
-target_link_libraries(grid PRIVATE libgrid Threads::Threads)
+add_executable(revak-example examples/main.cc)
+target_link_libraries(revak-example PRIVATE librevak Threads::Threads)

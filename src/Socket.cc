@@ -3,10 +3,10 @@
  * @brief Socket class implementation
  * 
  * Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
- * Licensed under the MIT License. Part of the Grid project.
+ * Licensed under the MIT License. Part of the Revak project.
  */
 
-#include "grid/Socket.h"
+#include "revak/Socket.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -15,7 +15,7 @@
 #include <stdexcept>
 #include <cstring>
 
-namespace grid {
+namespace revak {
 
 Socket::Socket() {
 	// Create TCP Socket (SOCK_STREAM) with IPv4 protocols (AF_INET) 
@@ -116,4 +116,4 @@ void Socket::Close() {
 	}
 }
 
-} // namespace grid
+} // namespace revak

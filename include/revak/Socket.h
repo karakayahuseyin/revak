@@ -3,7 +3,7 @@
  * @brief Socket class declaration
  * 
  * Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
- * Licensed under the MIT License. Part of the Grid project.
+ * Licensed under the MIT License. Part of the Revak project.
  */
 
 #pragma once
@@ -11,7 +11,7 @@
 #include <cstdint>
 #include <sys/socket.h>
 
-namespace grid {
+namespace revak {
 
 class Socket {
 public:
@@ -58,4 +58,4 @@ private:
   explicit Socket(int fd);
 };
 
-} // namespace grid
+} // namespace revak

@@ -3,17 +3,17 @@
  * @brief ThreadPool class implementation
  * 
  * Copyright (c) 2025 Hüseyin Karakaya (https://github.com/karakayahuseyin)
- * Licensed under the MIT License. Part of the Grid project.
+ * Licensed under the MIT License. Part of the Revak project.
  */
 
-#include <grid/ThreadPool.h>
+#include <revak/ThreadPool.h>
 
 #include <thread>
 #include <iostream>
 #include <mutex>
 #include <condition_variable>
 
-namespace grid {
+namespace revak {
 
 ThreadPool::ThreadPool(size_t numThreads) {
   for (size_t i = 0; i < numThreads; i++) {
@@ -67,4 +67,4 @@ void ThreadPool::Enqueue(std::function<void()> task) {
   condition_.notify_one();
 }
 
-} // namespace grid
+} // namespace revak
