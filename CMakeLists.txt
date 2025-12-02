@@ -48,5 +48,5 @@ target_include_directories(librevak PUBLIC
 target_link_libraries(librevak PUBLIC Threads::Threads)
 
 # Example executable
-add_executable(revak-example examples/main.cc)
-target_link_libraries(revak-example PRIVATE librevak Threads::Threads)
+add_executable(revak examples/main.cc)
+target_link_libraries(revak PRIVATE librevak Threads::Threads)
