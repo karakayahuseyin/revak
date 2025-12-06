@@ -66,8 +66,8 @@ void Server::Delete(const std::string& path, Handler handler) {
 }
 
 void Server::Stop() {
-  socket_.Close();
   running_ = false;
+  socket_.Close();
 }
 
 } // namespace revak
