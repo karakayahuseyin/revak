@@ -14,7 +14,7 @@
 namespace revak {
 
 Request::Request(const std::string_view& request) {
-  const int kHeaderEndLength=4, kLineEndLength=2;
+  const int kHeaderEndLength = 4, kLineEndLength = 2;
 
   // Parse HTTP 1.1 request
   auto header_end = request.find("\r\n\r\n");
