@@ -37,6 +37,9 @@ Request::Request(const std::string_view& request) {
     // Path
     size_t path_end = first_line.find(' ', method_end + 1);
     path_ = first_line.substr(method_end + 1, path_end - (method_end + 1));
+    
+    // Move line_start past the request line before parsing headers
+    line_start = line_end + kLineEndLength;
   }
 
   // Parse Headers
