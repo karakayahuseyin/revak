@@ -38,6 +38,8 @@ add_library(librevak
   src/Socket.cc
   src/ThreadPool.cc
   src/Response.cc
+  src/Request.cc
+  src/Router.cc
 )
 
 target_include_directories(librevak PUBLIC 
