@@ -8,7 +8,10 @@
 
 #include "revak/Response.h"
 
+#include <chrono>
+#include <string>
 #include <format>
+#include <ctime>
 
 namespace revak {
 
@@ -47,6 +50,27 @@ std::string Response::ToString() const {
     std::format("HTTP/1.1 {} {}\r\n", status_code_, status_message);
 
   std::string headers;
+  
+  // Get current time in UTC for Date header
+  auto now = std::chrono::system_clock::now();
+  auto now_t = std::chrono::system_clock::to_time_t(now);
+  
+  // Convert to UTC time struct
+  std::tm utc_time = *std::gmtime(&now_t);
+  
+  // Format RFC 7231 compliant Date header (UTC/GMT)
+  char date_buffer[100];
+  std::strftime(date_buffer, sizeof(date_buffer), "%a, %d %b %Y %H:%M:%S GMT", &utc_time);
+
+  // Add Server and Date headers
+  headers += "Server: Revak\r\n";
+  headers += std::format("Date: {}\r\n", date_buffer);
+
+  // Set Content-Length header only if not already set by user
+  if (headers_.find("Content-Length") == headers_.end()) {
+    headers += std::format("Content-Length: {}\r\n", body_.size());
+  }
+  
   for (const auto& [key, val] : headers_) {
     headers += std::format("{}: {}\r\n", key, val);
   }
