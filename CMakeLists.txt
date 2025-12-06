@@ -40,6 +40,7 @@ add_library(librevak
   src/Response.cc
   src/Request.cc
   src/Router.cc
+  src/Server.cc
 )
 
 target_include_directories(librevak PUBLIC 
