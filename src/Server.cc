@@ -13,7 +13,7 @@
 namespace revak {
 
 Server::Server(uint16_t port, size_t thread_nums)
-  : port_(port), thread_nums_(thread_nums), thread_pool_(thread_nums) {
+  : port_(port), thread_nums_(thread_nums),running_(false), thread_pool_(thread_nums)  {
   socket_ = Socket();
   socket_.Bind(port_);
   socket_.Listen();
