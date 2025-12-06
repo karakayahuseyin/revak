@@ -67,7 +67,7 @@ void Socket::Bind(uint16_t port) {
 	addr.sin_port = htons(port);
 
 	if (::bind(fd_, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
-		throw std::runtime_error("Failed to bind socket");
+		throw std::runtime_error("Failed to bind socket: " + std::string(std::strerror(errno)));
 	}
 }
 
@@ -111,6 +111,7 @@ void Socket::SetNonBlocking() {
 
 void Socket::Close() {
 	if (fd_ != -1) {
+		::shutdown(fd_, SHUT_RDWR); // syscall
 		::close(fd_); // syscall
 		fd_ = -1;
 	}
