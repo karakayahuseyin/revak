@@ -14,12 +14,14 @@
 namespace revak {
 
 Request::Request(const std::string_view& request) {
+  const int kHeaderEndLength=4, kLineEndLength=2;
+
   // Parse HTTP 1.1 request
   auto header_end = request.find("\r\n\r\n");
   
   // Header part
   std::string_view header_part = request.substr(0, header_end);
-  body_ = std::string(request.substr(header_end + 4));
+  body_ = std::string(request.substr(header_end + kHeaderEndLength));
 
   size_t line_start = 0;
   size_t line_end = header_part.find("\r\n");
@@ -50,7 +52,7 @@ Request::Request(const std::string_view& request) {
 
       headers_.emplace(key, val);
     }
-    line_start = line_end + 2;
+    line_start = line_end + kLineEndLength;
   }
 }
 }
