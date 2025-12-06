@@ -65,8 +65,12 @@ std::string Response::ToString() const {
   // Add Server and Date headers
   headers += "Server: Revak\r\n";
   headers += std::format("Date: {}\r\n", date_buffer);
-  // Always set Content-Length header
-  headers += std::format("Content-Length: {}\r\n", body_.size());
+
+  // Set Content-Length header only if not already set by user
+  if (headers_.find("Content-Length") == headers_.end()) {
+    headers += std::format("Content-Length: {}\r\n", body_.size());
+  }
+  
   for (const auto& [key, val] : headers_) {
     headers += std::format("{}: {}\r\n", key, val);
   }
