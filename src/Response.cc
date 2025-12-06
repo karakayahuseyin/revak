@@ -11,6 +11,7 @@
 #include <chrono>
 #include <string>
 #include <format>
+#include <ctime>
 
 namespace revak {
 
@@ -50,13 +51,20 @@ std::string Response::ToString() const {
 
   std::string headers;
   
-  // Get current time for Date header
+  // Get current time in UTC for Date header
   auto now = std::chrono::system_clock::now();
-  auto now_t = std::chrono::floor<std::chrono::seconds>(now);
+  auto now_t = std::chrono::system_clock::to_time_t(now);
+  
+  // Convert to UTC time struct
+  std::tm utc_time = *std::gmtime(&now_t);
+  
+  // Format RFC 7231 compliant Date header (UTC/GMT)
+  char date_buffer[100];
+  std::strftime(date_buffer, sizeof(date_buffer), "%a, %d %b %Y %H:%M:%S GMT", &utc_time);
 
   // Add Server and Date headers
   headers += "Server: Revak\r\n";
-  headers += std::format("Date: {:%a, %d %b %Y %H:%M:%S} GMT\r\n", now_t);
+  headers += std::format("Date: {}\r\n", date_buffer);
   // Always set Content-Length header
   headers += std::format("Content-Length: {}\r\n", body_.size());
   for (const auto& [key, val] : headers_) {
