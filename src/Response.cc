@@ -8,6 +8,7 @@
 
 #include "revak/Response.h"
 
+#include <string>
 #include <format>
 
 namespace revak {
@@ -47,6 +48,8 @@ std::string Response::ToString() const {
     std::format("HTTP/1.1 {} {}\r\n", status_code_, status_message);
 
   std::string headers;
+  // Always set Content-Length header
+  headers += std::format("Content-Length: {}\r\n", body_.size());
   for (const auto& [key, val] : headers_) {
     headers += std::format("{}: {}\r\n", key, val);
   }
