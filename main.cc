@@ -6,56 +6,31 @@
  * Licensed under the MIT License. Part of the Revak project.
  */
 
-#include "revak/Socket.h"
-#include "revak/ThreadPool.h"
-#include "revak/Response.h"
+#include "revak/Server.h"
 
 #include <iostream>
-#include <string>
-#include <memory>
-#include <unistd.h> 
-
-#define NUMS_THREAD 4
-
-void HandleClient(std::shared_ptr<revak::Socket> client) {
-	revak::Response resp;
-	resp.SetStatus(200);
-	resp.SetHeader("Content-Type", "text/plain");
-	std::string body = "Hello from Thread "
-		+ std::to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
-	resp.SetHeader("Content-Length", std::to_string(body.size()));
-	resp.SetHeader("Connection", "close");
-	resp.SetBody(body);
-
-	::write(client->NativeHandle(), resp.ToString().c_str(), resp.ToString().size());
-}    
+#include <stdexcept>
 
 int main() {
-  try {
-		std::cout << "[Main] Starting Server with " << NUMS_THREAD << " threads." << std::endl;
-		revak::ThreadPool pool(NUMS_THREAD);
+	try {
+		revak::Server server(8080, 4);
 
-		revak::Socket server;
-		server.Bind(8080);
-		server.Listen();
+		// Define a simple GET route
+		server.Get("/hello", [](const revak::Request& req) {
+			revak::Response res;
+			res.SetStatus(200);
+			res.SetBody(req.Method() + " " + req.Path() + " says Hello, World!\n");
 
-		std::cout << "[Main] Server is listening on port 8080" << std::endl;
+			res.SetHeader("Content-Type", "text/plain");
+			res.SetHeader("Connection", "close");
+			return res;
+		});
 
-		while (true) {
-			revak::Socket client = server.Accept();
-			
-			// Use shared_ptr to manage client socket lifetime in threads
-			auto shared_client = std::make_shared<revak::Socket>(std::move(client));
-
-			// Enqueue client handling task to the thread pool
-			pool.Enqueue([shared_client] {
-				HandleClient(shared_client);
-			});
-		}
+		// Start the server
+		std::cout << "Starting server on port 8080..." << std::endl;
+		server.Run();
 	} catch (const std::exception& e) {
-		std::cerr << "[Main] Server failed to start: " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 		return 1;
 	}
-
-	return 0;
 }
