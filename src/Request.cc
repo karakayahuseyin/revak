@@ -33,7 +33,7 @@ Request::Request(const std::string_view& request) {
     method_ = first_line.substr(0, method_end);
 
     // Path
-    size_t path_end = first_line.find("", method_end + 1);
+    size_t path_end = first_line.find(' ', method_end + 1);
     path_ = first_line.substr(method_end + 1, path_end - (method_end + 1));
   }
 
