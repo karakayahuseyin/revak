@@ -74,6 +74,4 @@ void Logger::Log(Level level, const std::string& messsage) {
   }
 }
 
-
-
 } // namespace revak
