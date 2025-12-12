@@ -57,7 +57,7 @@ Logger::~Logger() {
   }
 }
 
-void Logger::Log(Level level, const std::string& messsage) {
+void Logger::Log(Level level, const std::string& message) {
   // [Timestamp] [Level] [Message]
   auto now = std::chrono::system_clock::now();
   auto now_ms = std::chrono::floor<std::chrono::milliseconds>(now);
@@ -70,7 +70,7 @@ void Logger::Log(Level level, const std::string& messsage) {
     case Level::ERROR: level_str = "ERR "; break;
   }
 
-  std::string log_entry = std::format("[{}|{}] {}", timestamp, level_str, messsage);
+  std::string log_entry = std::format("[{}|{}] {}", timestamp, level_str, message);
 
   {
     std::lock_guard<std::mutex> lock(queue_mutex_);
