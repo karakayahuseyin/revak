@@ -53,7 +53,7 @@ private:
   // Queue for log messages
   std::queue<std::string> log_queue_;
 
-  // Atomic variable for stoping logging
+  // Atomic variable for stopping logging
   std::atomic<bool> stop_logging_{false};
 
   // Condition variable for log notification
