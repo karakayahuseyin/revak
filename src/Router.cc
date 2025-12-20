@@ -24,27 +24,29 @@ bool Router::AddRoute(const std::string& method, const std::string& path, Handle
     return false;
   }
 
-  // Check for existing route
-  for (const auto& route : routes_) {
-    if (route.method == method && route.path == path) {
-      Logger::Instance().Log(Logger::Level::WARNING, "Route already exists: " + method + " " + path);
-      return false;
-    }
+  auto& method_map = routes_[method];
+
+  if (method_map.contains(path)) {
+    Logger::Instance().Log(Logger::Level::WARNING, "Route already exists: " + method + " " + path);
+    return false;
   }
 
-  routes_.emplace_back(Route{method, path, std::move(handler)});
+  method_map[path] = std::move(handler);
   Logger::Instance().Log(Logger::Level::INFO, "Route added: " + method + " " + path);
   return true;
 }
 
 Response Router::Dispatch(const Request& request) {
   Logger::Instance().Log(Logger::Level::INFO, "Request received: " + request.Method() + " " + request.Path());
-  for (const auto& route : routes_) {
-    if (route.method == request.Method() && route.path == request.Path()) {
-      return route.handler(request);
+  auto method_it = routes_.find(request.Method());
+  if (method_it != routes_.end()) {
+    auto path_it = method_it->second.find(request.Path());
+    if (path_it != method_it->second.end()) {
+      Logger::Instance().Log(Logger::Level::INFO, "Dispatching to handler for: " 
+                             + request.Method() + " " + request.Path());
+      return path_it->second(request);
     }
   }
-
   Response response;
   response.SetStatus(404);
   response.SetBody("404 Not Found\n");
