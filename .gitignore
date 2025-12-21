@@ -48,4 +48,4 @@
 *.dwo
 
 # Doxygen output
-/docs/html/
+docs/html/
