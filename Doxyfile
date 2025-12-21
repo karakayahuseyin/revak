@@ -1,7 +1,7 @@
 PROJECT_NAME           = "revak"
 OUTPUT_DIRECTORY       = docs/html
 RECURSIVE              = YES
-INPUT                  = include
+INPUT                  = include docs/mainpage.dox
 FILE_PATTERNS          = *.h
 EXTRACT_ALL            = YES
 GENERATE_LATEX         = NO
