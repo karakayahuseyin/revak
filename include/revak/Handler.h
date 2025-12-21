@@ -17,5 +17,15 @@ class Request;
 
 /** Handler function type */
 using Handler = std::function<Response(const Request&)>;
+/**
+ * @code
+ * server.Get("/hello", [](const Request& req) {
+ *   Response res;
+ *   res.SetStatus(200);
+ *   res.SetBody("Hello");
+ *   return res;
+ * });
+ * @endcode
+ */
 
 } // namespace revak
