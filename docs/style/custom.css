@@ -1,0 +1,107 @@
+/* custom.css - Doxygen full black & white minimal override */
+body, .contents, .header, .footer, #main-nav, #titlearea, #nav-path, #nav-tree, #nav-sync, #nav-tree-contents, #MSearchResultsWindow, #MSearchSelectWindow {
+  background: #111 !important;
+  color: #fff !important;
+}
+a, a:link, a:visited, a:active {
+  color: #fff !important;
+  text-decoration: underline !important;
+}
+a:hover { color: #ccc !important; }
+#titlearea, .headertitle, .title, #projectname {
+  background: #111 !important;
+  color: #fff !important;
+  border-bottom: 1px solid #222 !important;
+}
+div.contents, .contents {
+  border-radius: 6px !important;
+  padding: 16px !important;
+  box-shadow: none !important;
+  background: #111 !important;
+  color: #fff !important;
+}
+pre, code, .fragment, .memproto, .memdoc, .memitem, .memname, .memtitle, .memtemplate, .memnav {
+  background: #222 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace !important;
+}
+hr, th, td, table, .memItemLeft, .memItemRight, .memTemplItemLeft, .memTemplItemRight {
+  border-color: #222 !important;
+}
+table, th, td {
+  background: #181818 !important;
+  color: #fff !important;
+}
+#projectname { font-weight: bold; font-size: 2em; color: #fff !important; }
+div.summary, .summary {
+  background: #181818 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+}
+div.header, .header {
+  background: #111 !important;
+  color: #fff !important;
+}
+div.footer, .footer {
+  background: #111 !important;
+  color: #888 !important;
+}
+#nav-tree, #nav-tree-contents, #nav-path, #nav-sync {
+  background: #111 !important;
+  color: #fff !important;
+  border: none !important;
+}
+#nav-tree a, #nav-tree-contents a, #nav-path a, #nav-sync a {
+  color: #fff !important;
+}
+#nav-tree a:hover, #nav-tree-contents a:hover, #nav-path a:hover, #nav-sync a:hover {
+  color: #ccc !important;
+}
+
+/* Main menu (SmartMenus) override */
+ul.sm, ul.sm-dox, ul.sm li, ul.sm-dox li, ul.sm a, ul.sm-dox a,
+ul.sm ul, ul.sm-dox ul, ul.sm ul li, ul.sm-dox ul li, ul.sm ul a, ul.sm-dox ul a {
+  background: #111 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+ul.sm a, ul.sm-dox a {
+  color: #fff !important;
+  background: #111 !important;
+  text-decoration: underline !important;
+}
+
+ul.sm a:hover, ul.sm-dox a:hover,
+ul.sm a:focus, ul.sm-dox a:focus {
+  background: #222 !important;
+  color: #ccc !important;
+}
+
+ul.sm .sub-arrow, ul.sm-dox .sub-arrow {
+  border-color: #fff !important;
+}
+
+ul.sm li, ul.sm-dox li {
+  border: none !important;
+}
+
+ul.sm ul, ul.sm-dox ul {
+  background: #111 !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+ul.sm li a, ul.sm-dox li a {
+  color: #fff !important;
+  background: #111 !important;
+}
+
+ul.sm li a:hover, ul.sm-dox li a:hover {
+  color: #ccc !important;
+  background: #222 !important;
+}

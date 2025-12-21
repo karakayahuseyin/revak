@@ -1,0 +1,34 @@
+/**
+ * @mainpage revak HTTP Server Library
+ *
+ * @section intro_sec Introduction
+ *
+ * **revak** is a modern, minimal, and fast HTTP server library written in C++.
+ *
+ * @section features_sec Features
+ * - Multithreaded request handling
+ * - Simple and functional router
+ * - Asynchronous logging
+ * - Extensible handler system
+ *
+ * @section example_sec Quick Example
+ * @code
+ * #include "revak/Server.h"
+ * int main() {
+ *   revak::Server server(8080, 4);
+ *   server.Get("/hello", [](const revak::Request& req) {
+ *     revak::Response res;
+ *     res.SetStatus(200);
+ *     res.SetBody("Hello, World!");
+ *     return res;
+ *   });
+ *   server.Run();
+ * }
+ * @endcode
+ *
+ * @section docs_sec Documentation
+ * - @ref revak::Server "Server"
+ * - @ref revak::Router "Router"
+ * - @ref revak::Request "Request"
+ * - @ref revak::Response "Response"
+ */

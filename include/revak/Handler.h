@@ -15,6 +15,19 @@ namespace revak {
 class Response;
 class Request;
 
+/**
+ * @typedef Handler
+ * @brief Type definition for request handler functions
+ * @code
+ * server.Get("/hello", [](const Request& req) {
+ *   Response res;
+ *   res.SetStatus(200);
+ *   res.SetBody("Hello");
+ *   return res;
+ * });
+ * @endcode
+ */
 using Handler = std::function<Response(const Request&)>;
+
 
 } // namespace revak

@@ -1,0 +1,9 @@
+PROJECT_NAME           = "revak"
+OUTPUT_DIRECTORY       = docs/html
+RECURSIVE              = YES
+INPUT                  = include docs/mainpage.dox
+FILE_PATTERNS          = *.h
+EXTRACT_ALL            = YES
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+HTML_EXTRA_STYLESHEET  = docs/style/custom.css

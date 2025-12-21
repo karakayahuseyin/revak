@@ -13,7 +13,10 @@
 
 namespace revak {
 
-/// @brief Handles HTTP Responses dynamically with status codes, headers and body
+/**
+ * @class Response
+ * @brief Represents a response with status code, headers, and body content
+ */
 class Response {
 public:
   Response() = default;
@@ -27,40 +30,52 @@ public:
   Response(Response&&) = default;
   Response& operator=(Response&&) = default;
 
-  /// @brief Set the status code of the response
-  /// @param code Status code to set
+  /**
+   * @brief Set the status code of the response
+   * @param code Status code as an integer
+   */
   void SetStatus(int code);
 
-  /// @brief Set a header key-value pair
-  /// @param key Header key
-  /// @param value Header value
+  /**
+   * @brief Set a header key-value pair
+   * @param key Header key
+   * @param value Header value
+   */
   void SetHeader(std::string key, std::string value);
 
-  /// @brief Set the body content of the response
-  /// @param content Body content as a string
+  /**
+   * @brief Set the body content of the response
+   * @param content Body content as a string
+   */
   void SetBody(std::string content);
 
-  /// @brief Convert the response to a string format suitable for sending
-  /// @return Formatted response string
+  /**
+   * @brief Convert the response to a raw HTTP response string
+   * @return Raw HTTP response as a string
+   */
   std::string ToString() const;
 
-  /// @brief Get the status code of the response
-  /// @return Status code as an integer
+  /**
+   * @brief Get the status code of the response
+   * @return Status code as an integer
+   */
   int GetStatusCode() const;
 
-  /// @brief Get the textual representation of the status code
-  /// @return Status text corresponding to the status code
+  /**
+   * @brief Get the status text corresponding to the status code
+   * @return Status text as a string
+   */
   std::string GetStatusText() const;
   
 private:
 
-  /// @brief Status code of the response
+  /** Status code of the response */
   int status_code_{200};
 
-  /// @brief Map to store header key-value pairs
+  /** Map to store header key-value pairs */
   std::map<std::string, std::string> headers_;
 
-  /// @brief Body content of the response
+  /** Body content of the response */
   std::string body_;
 };
 

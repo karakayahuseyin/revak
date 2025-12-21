@@ -17,6 +17,10 @@
 
 namespace revak {
 
+/**
+ * @class ThreadPool
+ * @brief A simple thread pool implementation to manage a pool of worker threads
+ */
 class ThreadPool {
 public:
   /**
@@ -25,26 +29,26 @@ public:
    */
   explicit ThreadPool(size_t numThreads);
 
-  /// @brief Destructor to join all threads
+  /** Destructor to join all threads */
   ~ThreadPool();
 
-  /// @brief Enqueue a new task to the thread pool
+  /** Enqueue a new task to the thread pool */
   void Enqueue(std::function<void()> task);
 
 private:
-  // Worker threads
+  /** Worker threads */
   std::vector<std::thread> workers_;
 
-  // Mutex for task queue
+  /** Mutex for task queue */
   std::mutex queue_mutex_;
 
-  // Flag to stop the pool
+  /** Flag to stop the pool */
   bool stop_;
 
-  // Task queue
+  /** Task queue */
   std::queue<std::function<void()>> tasks_;
 
-  // Condition variable for task notification
+  /** Condition variable for task notification */
   std::condition_variable condition_;
 };
 

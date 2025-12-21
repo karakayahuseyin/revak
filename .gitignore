@@ -46,3 +46,6 @@
 
 # debug information files
 *.dwo
+
+# Doxygen output
+docs/html/
