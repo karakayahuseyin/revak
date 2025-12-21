@@ -15,6 +15,7 @@ namespace revak {
 class Response;
 class Request;
 
+/** Handler function type */
 using Handler = std::function<Response(const Request&)>;
 
 } // namespace revak

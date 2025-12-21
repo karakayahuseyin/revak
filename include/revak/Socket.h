@@ -13,12 +13,16 @@
 
 namespace revak {
 
+/**
+ * @class Socket
+ * @brief Represents a TCP socket with basic operations like bind, listen, accept, and close
+ */
 class Socket {
 public:
-  /// @brief Create new TCP socket (socket() syscall)
+  /** Constructor to create a new TCP socket (socket() syscall) */
   Socket();
 
-  /// @brief Close Socket if open (close() syscall)
+  /** Destructor to close the socket if open (close() syscall) */
   ~Socket();
 
   // Delete Copy
@@ -29,26 +33,29 @@ public:
   Socket(Socket&& other) noexcept;
   Socket& operator=(Socket&& other) noexcept;
 
-  /// @brief Connect port and IP to Socket
+  /** Bind the socket to a specific port */
   bool Bind(uint16_t port);
 
-  /// @brief Puts the Socket to listening mode
+  /** Put the socket into listening mode */
   bool Listen();
 
-  /// @brief Accepts incoming connection and returns new Socket object
+  /** Accepts incoming connection and returns new Socket object */
   [[nodiscard]] Socket Accept();
 
-  /// @brief Puts to Socket in non-blocking mode
+  /** Puts the Socket in non-blocking mode */
   bool SetNonBlocking();
 
-  /// @brief Closes the socket
+  /** Close the socket */
   bool Close();
 
-  /// @brief Access for raw file descriptor
+  /** 
+   * @brief Get the native file descriptor of the socket
+   * @return File descriptor as an integer
+   */
   [[nodiscard]] int NativeHandle() const { return fd_; }
 
 private:
-  /// @brief Raw file descriptor
+  /** File descriptor for the socket */
   int fd_{-1};
 
   /**
